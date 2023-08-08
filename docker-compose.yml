@@ -1,0 +1,70 @@
+version: "3.9"
+services:
+  postgres:
+    container_name: postgres_curve
+    image: postgres:14.8-alpine3.18
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_DB: "users_security_db"
+      POSTGRES_PASSWORD: "root"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - /c/example_volumes/curve_key/pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 4G
+    networks:
+      apiaction:
+        ipv4_address: 172.16.1.5
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4:7.2
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "denis.filic@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "eerreerr"
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    volumes:
+      - /c/example_volumes/curve_key/pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    links:
+      - postgres
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+    networks:
+      apiaction:
+        ipv4_address: 172.16.1.6
+
+  curvekey:
+    container_name: curvekey
+    image: denisfilichev/curvekey:latest
+    volumes:
+      - /c/example_volumes:/app/sert
+      - /c/example_volumes/curve_key/conf:/app/conf
+    ports:
+      - "10012:10012"
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    networks:
+      apiaction:
+        ipv4_address: 172.16.1.7
+
+networks:
+  apiaction:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.1.0/24
+          gateway: 172.16.1.1
