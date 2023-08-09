@@ -7,7 +7,7 @@ services:
       - "5434:5432"
     environment:
       POSTGRES_USER: "postgres"
-      POSTGRES_DB: "users_security_db"
+      POSTGRES_DB: "curve_db"
       POSTGRES_PASSWORD: "root"
       PGDATA: "/var/lib/postgresql/data/pgdata"
     volumes:
@@ -32,7 +32,7 @@ services:
     volumes:
       - /c/example_volumes/curve_key/pgadmin:/var/lib/pgadmin
     ports:
-      - "5050:80"
+      - "5051:80"
     links:
       - postgres
     restart: unless-stopped

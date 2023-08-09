@@ -4,4 +4,4 @@ WORKDIR /app
 
 COPY target/curve_key-0.0.1-SNAPSHOT.jar curve_key.jar
 
-CMD ["java", "-jar", "ertelapiaction.jar"]
+CMD ["java", "-jar", "curve_key.jar"]
