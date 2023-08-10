@@ -16,16 +16,14 @@ import java.util.stream.Collectors;
 public class AppUserService {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
 
     @Autowired
-    public AppUserService(UserRepository userRepository, RoleRepository roleRepository) {
+    public AppUserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
     }
 
     public List<UserDetails> findAll(){
-        List<UserDetails> list = userRepository.findAll().stream().map(e -> AppUserDetails
+        return userRepository.findAll().stream().map(e -> AppUserDetails
                 .builder()
                 .id(e.getId())
                 .username(e.getUserName())
@@ -34,7 +32,5 @@ public class AppUserService {
                 .roles(e.getRoles().stream().map(UserRoleEntity::getRoleName).collect(Collectors.toSet()))
                 .build()
         ).collect(Collectors.toList());
-        list.forEach(System.out::println);
-        return list;
     }
 }

@@ -14,7 +14,7 @@ import java.util.Map;
 public class Dispatcher {
 
     private final VpnClientService clientService;
-    private VpnClientEntity client;
+    private final VpnClientEntity client;
     private Map<String, String> keies = new HashMap<>();
     private File file;
 
@@ -46,10 +46,9 @@ public class Dispatcher {
 
     private String getTaskText(){
         String source = "add allowed-address=%s comment=%s interface=%s public-key=\"%s\" preshared-key=\"%s\"";
-
         CompanyEntity company = client.getCompany();
         return String.format(source,
-                client.getAllowedAddress().replaceAll("\\s[/]\\d+$", "/32"),
+                client.getAllowedAddress().replaceAll("[/]\\d+$", "/32"),
                 client.getClientName() + "/" + company.getCompanyName(),
                 client.getVpnServer().getServername(),
                 keies.get(GeneratorKey.PUBLICKEY),

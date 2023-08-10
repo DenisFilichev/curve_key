@@ -47,7 +47,7 @@ public class CompletedDialog extends Dialog {
 
     private Button createSaveButton() {
         Button saveButton = new Button("Сохранить", e -> {
-            if(task!=null) {
+            if(task!=null && task.isActive()) {
                 task.setActive(false);
                 task.setDateExecution(Instant.now());
                 taskService.save(task);

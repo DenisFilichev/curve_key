@@ -10,7 +10,7 @@ import java.util.Set;
 public class CompanyClientGrid {
 
     private Grid<CompanyClientModel> grid;
-    private Set<CompanyClientModel> companies;
+    private final Set<CompanyClientModel> companies;
 
     public CompanyClientGrid(Set<CompanyEntity> companies){
         this.companies = CompanyClientModel.getInstancies(companies);
@@ -20,11 +20,11 @@ public class CompanyClientGrid {
     private void init() {
         grid = new Grid<>(CompanyClientModel.class, false);
         grid.setHeight(500, Unit.PIXELS);
-        grid.addColumn(CompanyClientModel::getCompanyName).setKey("company_name").setHeader("Компания").setAutoWidth(true);
-        grid.addColumn(CompanyClientModel::getClientName).setKey("client_name").setHeader("Клиент").setAutoWidth(true);
-        grid.addColumn(CompanyClientModel::getAllowedAddress).setKey("allowed_address").setHeader("IP адрес").setAutoWidth(true);
-        grid.addColumn(CompanyClientModel::getServername).setKey("server_name").setHeader("Сервер").setAutoWidth(true);
-        grid.addColumn(CompanyClientModel::getEndpoint).setKey("endpoint").setHeader("Адрес сервера").setAutoWidth(true);
+        grid.addColumn(CompanyClientModel::getCompanyName).setSortable(true).setKey("company_name").setHeader("Компания").setAutoWidth(true);
+        grid.addColumn(CompanyClientModel::getClientName).setSortable(true).setKey("client_name").setHeader("Клиент").setAutoWidth(true);
+        grid.addColumn(CompanyClientModel::getAllowedAddress).setSortable(true).setKey("allowed_address").setHeader("IP адрес").setAutoWidth(true);
+        grid.addColumn(CompanyClientModel::getServername).setSortable(true).setKey("server_name").setHeader("Сервер").setAutoWidth(true);
+        grid.addColumn(CompanyClientModel::getEndpoint).setSortable(true).setKey("endpoint").setHeader("Адрес сервера").setAutoWidth(true);
         grid.setItems(companies);
     }
 

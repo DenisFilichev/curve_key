@@ -28,12 +28,8 @@ public class CurveKeyApplication {
             File dir = new File("conf");
             dir.mkdir();
             String URL = separator.equals("\\") ? dir.getAbsolutePath().replaceAll("\\\\", "/") : dir.getAbsolutePath();
-            System.out.println();
-            System.out.println("---------------" + URL + "----------------");
-            System.out.println();
             PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
             List<Resource> resources = new ArrayList<>();
-            System.out.println("URL=" + URL);
             resources.addAll(Arrays.asList(resolver.getResources("classpath:/*.properties")));
             resources.addAll(Arrays.asList(resolver.getResources("file:" + URL + "/*.properties")));
 
