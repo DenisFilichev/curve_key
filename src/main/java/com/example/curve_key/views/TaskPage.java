@@ -36,6 +36,7 @@ public class TaskPage extends AppLayout {
     private final TaskService taskService;
     private final TaskGrid grid;
     private CompletedDialog completedDialog;
+    private VerticalLayout contentLayout;
     private H2 countItemGrid;
 
     @Autowired
@@ -52,7 +53,7 @@ public class TaskPage extends AppLayout {
     private void createContent(){
         Grid<TasksEntity> grid = this.grid.getGrid();
         filter(grid);
-        VerticalLayout contentLayout = new VerticalLayout();
+        contentLayout = new VerticalLayout();
         contentLayout.addClassName("list-view");
         setContent(contentLayout);
         completedDialog = new CompletedDialog(taskService);
@@ -62,6 +63,7 @@ public class TaskPage extends AppLayout {
                 countItemGrid,
                 grid
         );
+        contentLayout.setSizeFull();
     }
 
     private void createContextMenu(){
@@ -108,6 +110,8 @@ public class TaskPage extends AppLayout {
         microtikField.addValueChangeListener(e -> {
             dataView.refreshAll();
             countItemGrid.setText("Записей: " + dataView.getItemCount());
+            grid.setSizeFull();
+            contentLayout.setSizeFull();
         });
 
         Select<String> isActiveField = new Select<>();
@@ -119,6 +123,8 @@ public class TaskPage extends AppLayout {
         isActiveField.addValueChangeListener(e -> {
             dataView.refreshAll();
             countItemGrid.setText("Записей: " + dataView.getItemCount());
+            grid.setSizeFull();
+            contentLayout.setSizeFull();
         });
 
 

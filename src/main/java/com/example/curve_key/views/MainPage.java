@@ -41,6 +41,7 @@ public class MainPage extends AppLayout {
     private final VpnClientService clientService;
     private final VpnServerService serverService;
     private final CompanyClientGrid grid;
+    private VerticalLayout contentLayout;
     private CreateCompanyDialog createCompanyDialog;
     private CreateClientDialog createClientDialog;
     private CreateServerDialog createServerDialog;
@@ -63,7 +64,7 @@ public class MainPage extends AppLayout {
         Grid<CompanyClientModel> grid = this.grid.getGrid();
         countItemGrid = new H2("Записей: " + grid.getListDataView().getItemCount());
         filter(grid);
-        VerticalLayout contentLayout = new VerticalLayout();
+        contentLayout = new VerticalLayout();
         contentLayout.addClassName("list-view");
         setContent(contentLayout);
         createCompanyDialog = new CreateCompanyDialog(companyService);
@@ -78,6 +79,7 @@ public class MainPage extends AppLayout {
                 generatorDialog,
                 grid
         );
+        contentLayout.setSizeFull();
     }
 
     private void filter(Grid<CompanyClientModel> grid) {
@@ -93,6 +95,8 @@ public class MainPage extends AppLayout {
         companyField.addValueChangeListener(e -> {
             dataView.refreshAll();
             countItemGrid.setText("Записей: " + dataView.getItemCount());
+            grid.setSizeFull();
+            contentLayout.setSizeFull();
         });
 
         TextField clientField = new TextField();
@@ -105,6 +109,8 @@ public class MainPage extends AppLayout {
         clientField.addValueChangeListener(e -> {
             dataView.refreshAll();
             countItemGrid.setText("Записей: " + dataView.getItemCount());
+            grid.setSizeFull();
+            contentLayout.setSizeFull();
         });
 
         TextField ipClientField = new TextField();
@@ -117,6 +123,8 @@ public class MainPage extends AppLayout {
         ipClientField.addValueChangeListener(e -> {
             dataView.refreshAll();
             countItemGrid.setText("Записей: " + dataView.getItemCount());
+            grid.setSizeFull();
+            contentLayout.setSizeFull();
         });
 
         TextField serverField = new TextField();
@@ -129,6 +137,8 @@ public class MainPage extends AppLayout {
         serverField.addValueChangeListener(e -> {
             dataView.refreshAll();
             countItemGrid.setText("Записей: " + dataView.getItemCount());
+            grid.setSizeFull();
+            contentLayout.setSizeFull();
         });
 
         TextField endpointField = new TextField();
@@ -141,6 +151,8 @@ public class MainPage extends AppLayout {
         endpointField.addValueChangeListener(e -> {
             dataView.refreshAll();
             countItemGrid.setText("Записей: " + dataView.getItemCount());
+            grid.setSizeFull();
+            contentLayout.setSizeFull();
         });
 
 

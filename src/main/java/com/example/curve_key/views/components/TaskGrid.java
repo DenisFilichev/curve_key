@@ -27,7 +27,8 @@ public class TaskGrid {
     private void init() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
         grid = new Grid<>(TasksEntity.class, false);
-        grid.setHeight(500, Unit.PIXELS);
+        grid.setSizeFull();
+        //grid.setHeight(500, Unit.PIXELS);
         grid.addColumn(TasksEntity::getTaskText).setKey("text").setHeader("Строка микротика").setSortable(true).setFlexGrow(0).setWidth("60%").setResizable(true);
         grid.addColumn(e->{
             Instant instant = e.getDateGenerate();

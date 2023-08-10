@@ -19,7 +19,7 @@ public class CompanyClientGrid {
 
     private void init() {
         grid = new Grid<>(CompanyClientModel.class, false);
-        grid.setHeight(500, Unit.PIXELS);
+        grid.setSizeFull();
         grid.addColumn(CompanyClientModel::getCompanyName).setSortable(true).setKey("company_name").setHeader("Компания").setAutoWidth(true);
         grid.addColumn(CompanyClientModel::getClientName).setSortable(true).setKey("client_name").setHeader("Клиент").setAutoWidth(true);
         grid.addColumn(CompanyClientModel::getAllowedAddress).setSortable(true).setKey("allowed_address").setHeader("IP адрес").setAutoWidth(true);
